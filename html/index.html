@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Maeko: Beyond the Sound</title>
+    <link rel="stylesheet" href="/css/landingstyles.css" />
+    <link rel="stylesheet" href="/css/indexstyles.css" />
+    <style>
+      #main-page {
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="landing-page">
+      <div class="container">
+        <div class="loader">
+          <div class="finder-container">
+            <img src="/assets/frame.png" alt="" />
+            <img src="/assets/frame.png" alt="" />
+            <img src="/assets/frame.png" alt="" />
+            <img src="/assets/frame.png" alt="" />
+            <img src="/assets/frame.png" alt="" />
+          </div>
+          <div class="bar bar-1">
+            <div class="marquee">
+              <p>BEYOND THE SOUND</p>
+              <p>BEYOND THE SOUND</p>
+              <p>BEYOND THE SOUND</p>
+              <p>BEYOND THE SOUND</p>
+              <p>BEYOND THE SOUND</p>
+              <p>BEYOND THE SOUND</p>
+              <p>BEYOND THE SOUND</p>
+              <p>BEYOND THE SOUND</p>
+              <p>BEYOND THE SOUND</p>
+              <p>BEYOND THE SOUND</p>
+              <p>BEYOND THE SOUND</p>
+              <p>BEYOND THE SOUND</p>
+              <p>BEYOND THE SOUND</p>
+              <p>BEYOND THE SOUND</p>
+              <p>BEYOND THE SOUND</p>
+              <p>BEYOND THE SOUND</p>
+            </div>
+          </div>
+          <div class="bar bar-2"></div>
+          <div class="bar bar-3"></div>
+          <div class="bar bar-4"></div>
+          <div class="bar bar-1">
+            <div class="marquee">
+              <p>BEYOND THE SOUND</p>
+              <p>BEYOND THE SOUND</p>
+              <p>BEYOND THE SOUND</p>
+              <p>BEYOND THE SOUND</p>
+              <p>BEYOND THE SOUND</p>
+              <p>BEYOND THE SOUND</p>
+              <p>BEYOND THE SOUND</p>
+              <p>BEYOND THE SOUND</p>
+              <p>BEYOND THE SOUND</p>
+              <p>BEYOND THE SOUND</p>
+              <p>BEYOND THE SOUND</p>
+              <p>BEYOND THE SOUND</p>
+              <p>BEYOND THE SOUND</p>
+              <p>BEYOND THE SOUND</p>
+              <p>BEYOND THE SOUND</p>
+              <p>BEYOND THE SOUND</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="main-page">
+      <div class="logo">MAEKO</div>
+      <div class="dummy-img"></div>
+      <div class="dummy-text">MAEKO SOUND &copy;</div>
+      <div class="menu-container">
+        <div class="col col-1">
+          <div class="menu-item" id="menu-toggle">MENU</div>
+        </div>
+        <div class="col col-2">
+          <div class="menu-item" id="close-menu">CLOSE</div>
+          <div class="menu-item" data-target="/html/index.html">HOME</div>
+          <div class="menu-item" data-target="/html/about.html">ABOUT</div>
+          <div class="menu-item" data-target="/html/music.html">MUSIC</div>
+          <div class="menu-item" data-target="/html/myworld.html">MY WORLD</div>
+          <div class="menu-item" data-target="/html/doyouknowme.html">DO YOU KNOW ME?</div>
+          <div class="menu-item" data-target="/html/contact.html">CONTACT</div>
+        </div>        
+      </div>
+      <div class="marquee-container">
+        <div class="marquee">
+          HOME HOME HOME HOME HOME HOME HOME HOME HOME HOME HOME HOME HOME
+        </div>
+      </div>
+
+      <footer class="footer">
+        &copy; 2025 Maeko. All rights reserved.
+        <br />
+        <a href="/html/privacy.html" class="privacy-link">Privacy Policy</a>
+      </footer>      
+
+    </div>
+    
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.4/gsap.min.js"></script>
+    <script src="/js/landingjava.js"></script>
+    <script src="/js/indexjava.js"></script>
+
+    <script>
+window.addEventListener("load", () => {
+        setTimeout(() => {
+          document.getElementById("landing-page").style.display = "none";
+          document.getElementById("main-page").style.display = "block";
+        }, 6500);
+      });
+    </script>
+    
+  </body>
+</html>

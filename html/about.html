@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Maeko: About</title>
+    <link rel="stylesheet" href="/css/indexstyles.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+   
+   <style>
+body {
+  background-color: var(--bg);
+  color: var(--accent);
+  padding: 4rem 2rem;
+  font-family: 'Inter', sans-serif;
+}
+
+.about-container {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.about-header {
+  font-family: 'DM Serif Display', serif;
+  font-size: 3rem;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.about-image {
+  width: 250px;
+  height: 250px;
+  margin: 0 auto 2rem;
+  display: block;
+  border: 4px solid var(--highlight);
+  object-fit: cover;
+}
+
+.about-text {
+  font-size: 1rem;
+  line-height: 1.7;
+  text-align: left;
+  margin-bottom: 2rem;
+}
+
+.signature {
+  font-family: 'DM Serif Display', serif;
+  font-size: 1.25rem;
+  text-align: right;
+}
+
+.back-button {
+  position: fixed;
+  top: 2rem;
+  left: 2rem;
+  font-family: 'Inter', sans-serif;
+  font-size: 1rem;
+  cursor: pointer;
+  padding: 0.5rem;
+  transition: color 0.3s ease;
+  z-index: 100;
+}
+
+.back-button:hover {
+  color: var(--highlight);
+}
+
+@media (max-width: 600px) {
+  body {
+    padding: 2rem 1rem;
+  }
+
+  .about-header {
+    font-size: 2rem;
+    line-height: 1.2;
+    margin-bottom: 1rem;
+  }
+
+  .about-image {
+    width: 180px;
+    height: 180px;
+    margin-bottom: 1.5rem;
+  }
+
+  .about-text {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    text-align: justify;
+  }
+
+  .signature {
+    font-size: 1rem;
+  }
+
+  .back-button {
+    top: 1rem;
+    left: 1rem;
+    font-size: 0.9rem;
+    padding: 0.4rem;
+  }
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgb(0, 0, 0);
+  background: radial-gradient(
+    circle,
+    rgba(0, 0, 0, 0) 75%,
+    rgba(0, 0, 0, 0.5) 130%
+  );
+  z-index: 1;
+  pointer-events: none;
+}
+
+    </style>
+
+  </head>
+  <body>
+    <div class="overlay"></div>
+
+    <div class="about-container">
+      <h1 class="about-header">About Me</h1>
+      <img src="/assets/maekogreensit.jpeg" alt="Maeko artist portrait" class="about-image" />
+      <p class="about-text">
+        I'm Maeko, a rising voice in the music industry, I come from the country of Nigeria, I am based in Toronto, Canada. Blending soulful melodies, experimental textures, and raw emotion. For me, music is more than just sound. It's movement, feelings, and reminiscence.
+    </p>
+      <p class="about-text">
+        My sound is inspired by the openness of being human, late-night city drives, and old records spinning on calm mornings. I would say my genre is AfroR&BAlternativeIndie, if that's not a genre.. It is now. Every song I write is a conversation with the listener, with the moment, and with myself.
+    </p>
+      <p class="about-text">
+        My first song "Not You" is out now. I'm working on my first EP right now apart of this EP comes "Unstable", and "Nkunku". This project is cinematic, and a personal invitation into my world. Thank you for being part of this journey.
+    </p>
+      <p class="signature">- Maeko</p>
+    </div>
+
+    <div class="back-button" onclick="window.location.href='/html/index.html'">← BACK</div>
+  </body>
+</html>

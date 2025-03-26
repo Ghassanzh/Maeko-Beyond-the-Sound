@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Maeko: Do You Know Me?</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    @font-face {
+      font-family: 'Pigeon';
+      src: url('/fonts/pigeon.otf') format('opentype');
+      font-weight: normal;
+      font-style: normal;
+    }
+
+    body {
+      background-color: #FAF4EF;
+      color: #0D1B2A;
+      font-family: 'Inter', sans-serif;
+      padding: 2rem;
+      max-width: 700px;
+      margin: auto;
+    }
+
+    h1 {
+      font-family: 'Pigeon', serif;
+      font-size: 2.2rem;
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    .quiz {
+        display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 2rem;
+    }
+
+    .question {
+      font-weight: 600;
+      font-family: 'Inter', sans-serif;
+    }
+
+    .options label {
+        text-align: left;
+        align-items: center;
+      display: block;
+      margin: 0.5rem 0;
+      cursor: pointer;
+    }
+
+    button {
+      padding: 0.75rem 1.5rem;
+      background-color: #0D1B2A;
+      color: #FAF4EF;
+      font-weight: bold;
+      border: none;
+      cursor: pointer;
+      border-radius: 6px;
+      margin-top: 1rem;
+    }
+
+    #result {
+      margin-top: 2rem;
+      text-align: center;
+      font-size: 1.2rem;
+      font-weight: 600;
+    }
+
+    .back-button {
+  position: fixed;
+  top: 4rem;
+  left: 2rem;
+  font-family: 'Inter', sans-serif;
+  font-size: 1rem;
+  cursor: pointer;
+  padding: 0.5rem;
+  transition: color 0.3s ease;
+  z-index: 100;
+}
+
+.back-button:hover {
+  color: #FF6B6B;
+}
+
+@media (max-width: 600px) {
+    .back-button {
+    top: 4rem;
+    left: 1rem;
+    font-size: 0.9rem;
+    padding: 0.4rem;
+  }
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgb(0, 0, 0);
+  background: radial-gradient(
+    circle,
+    rgba(0, 0, 0, 0) 75%,
+    rgba(0, 0, 0, 0.5) 130%
+  );
+  z-index: 1;
+  pointer-events: none;
+}
+
+  </style>
+</head>
+
+<body>
+  <div class="overlay"></div>
+
+    <div class="back-button" onclick="window.location.href='/html/index.html'">← BACK</div>
+
+  <h1>Do You Know Me?</h1>
+  <form id="quizForm" class="quiz"></form>
+  <div id="result"></div>
+
+  <script>
+    function shuffle(array) {
+      for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+      }
+    }
+
+    const questions = [
+      {
+        q: "1. The country that I come from?",
+        name: "q1",
+        correct: "Nigeria",
+        options: ["Nigeria", "Ghana", "South Africa", "Canada"]
+      },
+      {
+        q: "2. What city am I based in?",
+        name: "q2",
+        correct: "Toronto, Ontario, Canada",
+        options: ["Toronto, Ontario, Canada", "Lagos, Nigeria", "New York, USA", "Paris, France"]
+      },
+      {
+        q: "3. What's my Genre?",
+        name: "q3",
+        correct: "AfroR&BAlternativeIndie",
+        options: ["AfroR&BAlternativeIndie", "Afrobeats", "R&B", "Alternative", "Indie"]
+      },
+      {
+        q: "4. What is my first song?",
+        name: "q4",
+        correct: "Not You",
+        options: ["Not You", "Unstable", "Nkunku", "Uncertain"]
+      },
+      {
+        q: "5. Which song's are coming soon?",
+        name: "q5",
+        correct: "Unstable, Nkunku",
+        options: ["Unstable, Nkunku", "Unstable, Palmer", "Uncertain, Nkunku", "Uncertain, Palmer"]
+      }
+    ];
+
+    const quizForm = document.getElementById('quizForm');
+
+    questions.forEach((item) => {
+      const div = document.createElement('div');
+      const shuffledOptions = [...item.options];
+      shuffle(shuffledOptions);
+      div.innerHTML = `
+        <p class="question">${item.q}</p>
+        <div class="options">
+          ${shuffledOptions.map(opt => `
+            <label><input type="radio" name="${item.name}" value="${opt}"> ${opt}</label>
+          `).join('')}
+        </div>
+      `;
+      quizForm.appendChild(div);
+    });
+
+    const answers = Object.fromEntries(questions.map(q => [q.name, q.correct]));
+
+    const submitBtn = document.createElement('button');
+    submitBtn.textContent = 'Submit';
+    quizForm.appendChild(submitBtn);
+
+    quizForm.addEventListener('submit', function (e) {
+      e.preventDefault();
+      let score = 0;
+      Object.keys(answers).forEach(q => {
+        const selected = document.querySelector(`input[name="${q}"]:checked`);
+        if (selected && selected.value === answers[q]) {
+          score++;
+        }
+      });
+
+      let message = "";
+      if (score === 5) message = "Alright, alright. You know me.";
+      else if (score >= 3) message = "Mmm, you're getting there.";
+      else message = "Bruh, do you even know me?";
+
+      document.getElementById('result').textContent = `You got ${score}/5 correct. ${message}`;
+    });
+  </script>
+</body>
+</html>

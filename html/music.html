@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Maeko: Music</title>
+    <link rel="stylesheet" href="/css/indexstyles.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        @font-face {
+          font-family: 'Pigeon';
+          src: url('/fonts/pigeon.otf') format('opentype');
+          font-weight: normal;
+          font-style: normal;
+        }
+      
+        :root {
+          --bg: #FAF4EF;
+          --accent: #0D1B2A;
+          --highlight: #FF6B6B;
+        }
+      
+        * {
+          box-sizing: border-box;
+          margin: 0;
+          padding: 0;
+        }
+      
+        html, body {
+          width: 100%;
+          overflow-x: hidden;
+        }
+      
+        body {
+          background-color: var(--bg);
+          color: var(--accent);
+          font-family: 'Inter', sans-serif;
+          padding: 1.5rem;
+        }
+
+        .back-button {
+        position: fixed;
+        top: 2rem;
+        left: 2rem;
+        font-family: 'Inter', sans-serif;
+        font-size: 1rem;
+        cursor: pointer;
+        padding: 0.5rem;
+        transition: color 0.3s ease;
+        z-index: 100;
+        }
+
+        .back-button:hover {
+        color: var(--highlight);
+        }
+      
+        h1 {
+          font-family: 'Pigeon', serif;
+          font-size: 2.25rem;
+          text-align: center;
+          margin-bottom: 1.5rem;
+        }
+      
+        .section {
+          margin-bottom: 2.5rem;
+        }
+      
+        .section h2 {
+          font-family: 'Pigeon', serif;
+          font-size: 1.5rem;
+          margin-bottom: 1.25rem;
+          text-align: center;
+        }
+      
+        .track {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          text-align: center;
+          margin-bottom: 2rem;
+          padding: 0.5rem;
+        }
+      
+        .track img {
+          width: 100%;
+          max-width: 250px;
+          height: auto;
+          object-fit: cover;
+          border: 3px solid var(--highlight);
+          border-radius: 10px;
+          transition: transform 0.3s ease;
+        }
+      
+        .track:hover img {
+          transform: scale(1.03);
+        }
+      
+        .track-info {
+          width: 100%;
+          max-width: 360px;
+          margin-top: 0.75rem;
+          padding: 0 0.5rem;
+        }
+      
+        canvas {
+          width: 100%;
+          height: 50px;
+          background: transparent;
+          display: block;
+          margin-top: 0.5rem;
+        }
+      
+        audio {
+          width: 100%;
+          outline: none;
+          margin-top: 0.5rem;
+        }
+      
+        @media (max-width: 768px) {
+          body {
+            padding: 1rem;
+          }
+      
+          h1 {
+            font-size: 1.75rem;
+          }
+      
+          .section h2 {
+            font-size: 1.25rem;
+          }
+      
+          .track img {
+            max-width: 100%;
+          }
+      
+          canvas {
+            height: 40px;
+          }
+          
+          .back-button {
+    top: 1rem;
+    left: 1rem;
+    font-size: 0.9rem;
+    padding: 0.4rem;
+  }
+        }
+        
+ .overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgb(0, 0, 0);
+  background: radial-gradient(
+    circle,
+    rgba(0, 0, 0, 0) 75%,
+    rgba(0, 0, 0, 0.5) 130%
+  );
+  z-index: 1;
+  pointer-events: none;
+}
+
+      </style>
+  </head>
+
+  <body>
+    <div class="overlay"></div>
+
+    <div class="back-button" onclick="window.location.href='/html/index.html'">← BACK</div>
+
+    <h1>Music</h1>
+
+    <div class="section">
+      <h2>Out Now</h2>
+      <div class="track" onclick="toggleTrack('track1')">
+        <img src="/assets/Not You.png" alt="Not You by Maeko" />
+        <div class="track-info">
+          <strong>Not You</strong>
+          <canvas id="canvas-track1"></canvas>
+          <audio id="audio-track1">
+            <source src="/songs/Not You.wav" type="audio/wav" />
+          </audio>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>Coming Soon</h2>
+      <div class="track">
+        <img src="/assets/Unstable.jpg" alt="Unstable by Maeko" />
+        <div class="track-info">
+          <strong>Unstable</strong>
+        </div>
+      </div>
+
+      <div class="track">
+        <img src="/assets/Nkunku.jpg" alt="Nkunku by Maeko" />
+        <div class="track-info">
+          <strong>Nkunku</strong>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.0.2/TweenMax.min.js"></script>
+    <script>
+      function setupWaveform(canvasId, audioId) {
+        const c = document.getElementById(canvasId);
+        const audio = document.getElementById(audioId);
+        if (!c || !audio) return;
+
+        let opt = {
+          width: c.offsetWidth,
+          height: c.offsetHeight,
+          midY: c.offsetHeight / 2,
+          points: 60,
+          stretch: 10,
+          sinHeight: 0,
+          speed: -0.1,
+          strokeColor: "#0D1B2A",
+          strokeWidth: 1.5,
+          power: false,
+        };
+
+        c.width = opt.width * 2;
+        c.height = opt.height * 2;
+        c.style.width = opt.width + "px";
+        c.style.height = opt.height + "px";
+
+        const ctx = c.getContext("2d");
+        ctx.scale(2, 2);
+        ctx.strokeStyle = opt.strokeColor;
+        ctx.lineWidth = opt.strokeWidth;
+        ctx.lineCap = "round";
+        ctx.lineJoin = "round";
+
+        let time = 0;
+        const render = () => {
+          requestAnimationFrame(render);
+          ctx.clearRect(0, 0, opt.width, opt.height);
+          time += 1;
+          ctx.beginPath();
+          let increment = 0;
+
+          for (let i = 0; i <= opt.points; i++) {
+            if (i < opt.points / 2) increment += 0.1;
+            else increment += -0.1;
+
+            const x = (opt.width / opt.points) * i;
+            const y =
+              opt.midY +
+              Math.sin(time * opt.speed + i / opt.stretch) *
+                opt.sinHeight *
+                increment;
+            ctx.lineTo(x, y);
+          }
+
+          ctx.stroke();
+        };
+
+        render();
+
+        c.addEventListener("click", () => {
+          opt.power = !opt.power;
+          if (opt.power) {
+            audio.play();
+            TweenMax.to(opt, 1, {
+              sinHeight: 4,
+              stretch: 5,
+              ease: Power2.easeInOut,
+            });
+          } else {
+            audio.pause();
+            TweenMax.to(opt, 1, {
+              sinHeight: 0,
+              stretch: 10,
+              ease: Power3.easeOut,
+            });
+          }
+        });
+      }
+
+      function toggleTrack(id) {
+        const canvas = document.getElementById(`canvas-${id}`);
+        if (canvas) canvas.click();
+      }
+
+      window.addEventListener("DOMContentLoaded", () => {
+        setupWaveform("canvas-track1", "audio-track1");
+      });
+    </script>
+  </body>
+</html>

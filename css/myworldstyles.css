@@ -1,0 +1,82 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+  background-color: #FAF4EF;
+  overflow: hidden;
+}
+
+.back-button {
+  position: fixed;
+  top: 2rem;
+  left: 2rem;
+  font-family: 'Inter', sans-serif;
+  font-size: 1rem;
+  cursor: pointer;
+  padding: 0.5rem;
+  transition: color 0.3s ease;
+  z-index: 100;
+}
+
+.back-button:hover {
+  color: #FF6B6B;
+}
+
+canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
+nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  padding: 2em;
+  display: flex;
+  justify-content: center;
+  z-index: 2;
+  pointer-events: none;
+}
+
+nav p {
+  text-transform: uppercase;
+  font-family: "Inter";
+  font-size: 12px;
+  font-weight: 600;
+  padding: 4px;
+  background-color: #3A5A98;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.header {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  transform-style: preserve-3d;
+  perspective: 1000px;
+  will-change: transform;
+  z-index: 2;
+  pointer-events: none;
+}
+
+h1 {
+  color: #3A5A98;
+  text-transform: uppercase;
+  font-family: "Pigeon";
+  font-size: 7.5vw;
+  letter-spacing: -0.025em;
+  line-height: 1;
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+}
